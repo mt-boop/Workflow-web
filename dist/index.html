@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Make room for meaningful work. Plan tasks, move projects forward, and find your focus with Momentum.">
+  <title>Momentum — Your daily workspace</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%232b453c'/%3E%3Cpath d='M10 28V12l10 11 10-11v16' fill='none' stroke='%23e6eeaa' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to workspace</a>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#today" aria-label="Momentum home"><span class="brand-mark">m<span>↗</span></span>momentum<span class="brand-dot">.</span></a>
+      <div class="workspace-label"><span class="workspace-avatar">Y</span><span>Your workspace<small>Personal space</small></span><span class="local-indicator" title="Saved on this device"></span></div>
+      <span class="eyebrow nav-label">WORKSPACE</span>
+      <nav aria-label="Workspace">
+        <button class="nav-item" data-view="today"><span data-icon="sun"></span>My day<span id="day-count" class="nav-count"></span></button>
+        <button class="nav-item" data-view="board"><span data-icon="board"></span>Workflow board</button>
+        <button class="nav-item" data-view="focus"><span data-icon="timer"></span>Focus room</button>
+        <button class="nav-item" data-view="notes"><span data-icon="note"></span>Notes</button>
+      </nav>
+      <div class="project-heading"><span class="eyebrow">PROJECTS</span><button class="icon-btn" id="add-project" aria-label="Add project">+</button></div>
+      <div id="project-nav"></div>
+      <div class="sidebar-bottom">
+        <div class="little-note"><span class="sprout">✳</span><p>Small steps.<br><strong>Meaningful progress.</strong></p></div>
+        <button class="nav-item" data-view="guide"><span data-icon="help"></span>Getting started</button>
+        <div class="storage-label"><span class="local-indicator"></span>Saved in this browser</div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Your workspace</span><span class="slash">/</span><strong id="view-label">My day</strong></div>
+        <div class="top-actions"><div class="search-wrap"><span data-icon="search"></span><input id="search" aria-label="Search tasks" placeholder="Search tasks…" type="search"><kbd>/</kbd></div><button class="avatar" data-view="guide" title="Workspace guide" aria-label="Open workspace guide">Y</button></div>
+      </header>
+      <main id="main" tabindex="-1"></main>
+      <footer><span>One thing at a time.</span><span id="save-status" role="status">All changes saved locally <span class="tiny-check">✓</span></span></footer>
+    </div>
+  </div>
+  <dialog id="task-dialog" aria-labelledby="task-dialog-title">
+    <form id="task-form"><div class="modal-top"><span class="eyebrow">MAKE A LITTLE PROGRESS</span><button type="button" class="icon-btn close-modal" aria-label="Close">×</button></div><h2 id="task-dialog-title">A new next step.</h2>
+      <input type="hidden" id="task-id"><label for="task-title">Task name</label><input id="task-title" maxlength="180" placeholder="What would you like to move forward?" required>
+      <label for="task-detail">Details <span class="muted">(optional)</span></label><textarea id="task-detail" maxlength="3000" rows="3" placeholder="A little context, a useful link, a first step…"></textarea>
+      <div class="form-grid"><div><label for="task-project">Project</label><select id="task-project"></select></div><div><label for="task-priority">Priority</label><select id="task-priority"><option value="normal">Normal</option><option value="high">High priority</option><option value="low">Low priority</option></select></div><div><label for="task-due">Due date</label><input id="task-due" type="date"></div><div><label for="task-status">Stage</label><select id="task-status"><option value="todo">To do</option><option value="doing">In progress</option><option value="done">Done</option></select></div></div>
+      <div class="modal-bottom"><button type="button" id="delete-task" class="text-btn danger">Delete task</button><button type="submit" class="btn primary">Save task <span>↗</span></button></div>
+    </form>
+  </dialog>
+  <dialog id="project-dialog" aria-labelledby="project-title"><form id="project-form"><div class="modal-top"><span class="eyebrow">A LITTLE ORGANIZATION</span><button type="button" class="icon-btn close-modal" aria-label="Close">×</button></div><h2 id="project-title">Start a project.</h2><label for="project-name">Project name</label><input id="project-name" maxlength="60" required placeholder="Something worth working on"><label for="project-color">Color</label><select id="project-color"><option value="sage">Sage green</option><option value="orange">Warm orange</option><option value="purple">Soft violet</option><option value="blue">Sky blue</option></select><div class="modal-bottom"><span></span><button class="btn primary" type="submit">Create project ↗</button></div></form></dialog>
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+  <div id="toast" role="status" class="toast" hidden></div>
+</body>
+</html>
